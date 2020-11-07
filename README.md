@@ -1,8 +1,8 @@
 # Up Next
 
 * [Prerequisites](#prerequisites)
-* [Project setup](#application-setup)
-* [Deployment](#deployment)
+* [Project setup](#project-setup)
+* [Application setup](#application-setup)
 * [Resources](#resources)
 
 ## Prerequisites
@@ -16,10 +16,9 @@
    ```
 3. If already installed, update brew...
    ```sh
-   brew update && brew upgrade && brew cleanup #
+   brew update && brew upgrade && brew cleanup
    ```
 4. Otherwise, follow the installation instructions at https://brew.sh/
-
 
 ### Install `yarn` (if not already installed)
 
@@ -37,13 +36,17 @@
 ### Create app
 
 1. Open a terminal
-2. Create and name your project
+2. Create a project directory, e.g.
    ```sh
-   yarn create next-app
+   mkdir up-next
    ```
-3. Navigate to project directory
+3. Navigate into the project directory, e.g.
    ```sh
-   cd [your-project-name] # e.g. cd up-next
+   cd up-next
+   ```
+4. Create a Next.js application
+   ```sh
+   yarn create next-app .
    ```
 
 ### Install TypeScript
@@ -61,6 +64,51 @@
    yarn dev
    ```
 
-## Deployment
+### Edit `tsconfig.json`
+
+1. Add `baseUrl` to the `compilerOptions`, e.g...
+   ```sh
+   {
+     "compilerOptions": {
+       "baseUrl": "."
+     }
+   }
+   ```
+2. Add `paths` to the `compilerOptions`, e.g...
+   ```sh
+   {
+     "compilerOptions": {
+       "paths": {
+         "~/*": ["./*"]
+       }
+     }
+   }
+   ```
+
+### Install Sass
+
+1. Add sass package
+   ```sh
+   yarn add --dev sass
+   ```
+2. Add `next.config.js`
+   ```sh
+   touch next.config.js
+   ```
+3. Edit `next.config.js`
+   ```js
+   const path = require('path')
+
+   module.exports = {
+     sassOptions: {
+       includePaths: [path.join(__dirname, 'styles')],
+     },
+   }
+   ```
+
+## Application setup
 
 ## Resources
+
+* [Absolute Imports and Module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases)
+* [Built-In CSS Support](https://nextjs.org/docs/basic-features/built-in-css-support)
