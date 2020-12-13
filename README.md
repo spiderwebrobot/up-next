@@ -11,19 +11,19 @@
 
 ## Prerequisites
 
-### Install or update `brew`
+### Install brew
 
 1. Check if `brew` is already installed
    ```sh
    which brew # e.g. /usr/local/bin/brew
    ```
-2. If `brew` is already installed, then update it...
+2. If `brew` is already installed, then consider an update...
    ```sh
    brew update && brew upgrade && brew cleanup
    ```
 3. Otherwise, follow the installation instructions at https://brew.sh/
 
-### Install `yarn`
+### Install yarn
 
 1. Check if `yarn` is already installed
    ```sh
@@ -66,20 +66,13 @@
    yarn dev
    ```
 
-### Edit the `tsconfig.json` file
+### Configure TypeScript
 
-1. Add `baseUrl` to the `compilerOptions`, e.g...
+1. Edit `tsconfig.json`, add `baseUrl` and `paths` to the `compilerOptions`, e.g...
    ```sh
    {
      "compilerOptions": {
-       "baseUrl": "."
-     }
-   }
-   ```
-2. Add `paths` to the `compilerOptions`, e.g...
-   ```sh
-   {
-     "compilerOptions": {
+       "baseUrl": ".",
        "paths": {
          "~/*": ["./*"]
        }
@@ -97,7 +90,7 @@
    ```sh
    touch next.config.js
    ```
-3. Edit the `next.config.js` file
+3. Edit `next.config.js`
    ```js
    const path = require('path')
 
@@ -108,9 +101,9 @@
    }
    ```
 
-### Install normalize
+### Install normalize.css
 
-1. Add `normalize` to the project
+1. Add `normalize.css` to the project
    ```sh
    yarn add normalize.css
    ```
@@ -129,10 +122,10 @@
    mkdir -p public/fonts/poiret-one && mkdir -p public/images/brand && mkdir -p public/images/heroes/maria-felix
    ```
 2. Download the latin-version of [Poiret One](https://fonts.googleapis.com/css2?family=Poiret+One&display=swap) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
-3. Download the [Full Moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
-4. Download the [fallback hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY414_CR18,0,414,414_AL_.jpg) to `public/images/heroes/maria-felix/enamorada.jpg`
-5. Download the [landscape hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
-6. Download the [portrait hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
+3. Download the [full moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
+4. Download the [fallback hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY414_CR18,0,414,414_AL_.jpg) to `public/images/heroes/maria-felix/enamorada.jpg`
+5. Download the [landscape hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
+6. Download the [portrait hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
 
 ## Website styles
 
