@@ -2,69 +2,71 @@
 
 * [Prerequisites](#prerequisites)
 * [Project setup](#project-setup)
-* [Application setup](#application-setup)
+* [Public files](#public-files)
+* [Website styles](#website-styles)
+* [Brand components](#brand-components)
+* [Hero component](#hero-component)
+* [Pages](#pages)
 * [Resources](#resources)
 
 ## Prerequisites
 
 ### Install or update `brew`
 
-1. Open a terminal
-2. Check if brew already installed, e.g. /usr/local/bin/brew
+1. Check if `brew` is already installed
    ```sh
-   which brew
+   which brew # e.g. /usr/local/bin/brew
    ```
-3. If already installed, update brew...
+2. If `brew` is already installed, then update it...
    ```sh
    brew update && brew upgrade && brew cleanup
    ```
-4. Otherwise, follow the installation instructions at https://brew.sh/
+3. Otherwise, follow the installation instructions at https://brew.sh/
 
-### Install `yarn` (if not already installed)
+### Install `yarn`
 
-1. Check if yarn already installed, e.g. /usr/local/bin/yarn
+1. Check if `yarn` is already installed
    ```sh
-   which yarn
+   which yarn # e.g. /usr/local/bin/yarn
    ```
-2. Otherwise, install yarn
+2. Otherwise, install `yarn`
    ```sh
    brew install yarn
    ```
 
 ## Project setup
 
-### Start Next.js project
+### Start a Next.js project
 
-1. Open a terminal
-2. Create a project directory, e.g.
+1. Create the project directory, e.g.
    ```sh
-   mkdir up-next
+   mkdir over-the-moon
    ```
-3. Navigate into the project directory, e.g.
+2. Navigate into the project directory, e.g.
    ```sh
-   cd up-next
+   cd over-the-moon
    ```
-4. Create a Next.js application
+3. Create a Next.js application
    ```sh
    yarn create next-app .
    ```
 
 ### Install TypeScript
 
-1. Create TypeScript configuration file
+1. Create a TypeScript configuration file
    ```sh
    touch tsconfig.json
    ```
-2. Add TypeScript packages
+2. Add `typescript` to the project
    ```sh
    yarn add --dev typescript @types/react @types/node
    ```
-3. Populate the `tsconfig.json` file
+3. Autopopulate the `tsconfig.json` file
    ```sh
    yarn dev
    ```
 
-### Edit `tsconfig.json`
+### Edit the `tsconfig.json` file
 
 1. Add `baseUrl` to the `compilerOptions`, e.g...
    ```sh
@@ -87,15 +89,15 @@
 
 ### Install Sass
 
-1. Add sass package
+1. Add `sass` to the project
    ```sh
    yarn add --dev sass
    ```
-2. Add `next.config.js`
+2. Create a Next.js configuration file
    ```sh
    touch next.config.js
    ```
-3. Edit `next.config.js`
+3. Edit the `next.config.js` file
    ```js
    const path = require('path')
 
@@ -108,53 +110,37 @@
 
 ### Install normalize
 
-1. Add normalize
+1. Add `normalize` to the project
    ```sh
    yarn add normalize.css
    ```
 
 ### Housekeeping
 
-1. Remove `pages`, `public`, and `styles` directories
+1. Remove the `pages`, `public` and `styles` directories
    ```sh
    rm -rf pages && rm -rf public && rm -rf styles
    ```
 
-## Application setup
+## Public files
 
-### Fonts
-
-1. Create `poiret-one` directory
+1. Create the directories
    ```sh
-   mkdir -p public/fonts/poiret-one
+   mkdir -p public/fonts/poiret-one && mkdir -p public/images/brand && mkdir -p public/images/heroes/maria-felix
    ```
 2. Download the latin-version of [Poiret One](https://fonts.googleapis.com/css2?family=Poiret+One&display=swap) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
+3. Download the [Full Moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
+4. Download the [fallback hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY414_CR18,0,414,414_AL_.jpg) to `public/images/heroes/maria-felix/enamorada.jpg`
+5. Download the [landscape hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
+6. Download the [portrait hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
 
-### Brand images
+## Website styles
 
-1. Create `brand` directory
+1. Create the directory and files
    ```sh
-   mkdir -p public/images/brand
+   mkdir styles && touch styles/_mixins.scss && touch styles/_variables.scss && touch styles/brand.scss
    ```
-2. Download the [Full Moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
-
-### Hero images
-
-1. Create `maria-felix` directory
-   ```sh
-   mkdir -p public/images/heroes/maria-felix
-   ```
-2. Download the [fallback hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY414_CR18,0,414,414_AL_.jpg) to `public/images/heroes/maria-felix/enamorada.jpg`
-3. Download the [landscape hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
-4. Download the [portrait hero image](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
-
-### Sass mixins
-
-1. Create `_mixins.scss`
-   ```sh
-   mkdir styles && touch styles/_mixins.scss
-   ```
-2. Edit `_mixins.scss`
+2. Edit `styles/_mixins.scss`
    ```scss
    // Media Queries
 
@@ -164,39 +150,25 @@
      }
    }
    ```
-
-### Sass variables
-
-1. Create `_variables.scss`
-   ```sh
-   touch styles/_variables.scss
-   ```
-2. Edit `_variables.scss`
+3. Edit `styles/_variables.scss`
    ```scss
    // Colors
 
-   $dark-gray: #333;
+   $dark-gray: #333333;
    $light-gray: #E5E5E5;
 
    // Layout
 
    $gutter-height: 1.44rem;
    $gutter-width: clamp(1.44rem, 3vw, 2.7rem);
-   $max-width: 1024px;
+   $container-width: 1024px;
 
    // Text
 
    $text-heading: clamp(27px, 3vw, 36px);
    $text-lead: clamp(100%, 3vw, 1.26rem);
    ```
-
-### Brand styles
-
-1. Create `brand.scss`
-   ```sh
-   touch styles/brand.scss
-   ```
-2. Edit `brand.scss`
+4. Edit `styles/brand.scss`
    ```scss
    @import "normalize.css"; // TODO: figure out how to `@use` normalize.css
 
@@ -240,14 +212,15 @@
    }
    ```
 
+## Brand components
+
 ### Footer component
 
-
-1. Create `Footer.module.scss`
+1. Create the directories and files
    ```sh
-   mkdir -p components/brand && touch components/brand/Footer.module.scss
+   mkdir -p components/brand && touch components/brand/Footer.module.scss && touch components/brand/Footer.tsx
    ```
-2. Edit `Footer.module.scss`
+2. Edit `components/brand/Footer.module.scss`
    ```scss
    @use "/styles/variables" as var;
 
@@ -258,7 +231,7 @@
 
    .container {
      padding: var.$gutter-height 0;
-     max-width: var.$max-width;
+     max-width: var.$container-width;
      margin: 0 auto;
    }
 
@@ -269,11 +242,7 @@
      font-size: clamp(12px, 2vw, 100%);
    }
    ```
-3. Create `Footer.tsx`
-   ```sh
-   touch components/brand/Footer.tsx
-   ```
-4. Edit `Footer.tsx`
+3. Edit `components/brand/Footer.tsx`
    ```ts
    import styles from "./Footer.module.scss"
 
@@ -295,11 +264,11 @@
 
 ### Header component
 
-1. Create `Header.module.scss`
+1. Create the files
    ```sh
-   touch components/brand/Header.module.scss
+   touch components/brand/Header.module.scss && touch components/brand/Header.tsx
    ```
-2. Edit `Header.module.scss`
+2. Edit `components/brand/Header.module.scss`
    ```scss
    @use "/styles/variables" as var;
 
@@ -308,7 +277,7 @@
    }
 
    .container {
-     max-width: var.$max-width;
+     max-width: var.$container-width;
      margin: 0 auto;
    }
 
@@ -323,11 +292,7 @@
      font-size: clamp(100%, 2vw, 27px);
    }
    ```
-3. Create `Header.tsx`
-   ```sh
-   touch components/brand/Header.tsx
-   ```
-4. Edit `Header.tsx`
+3. Edit `components/brand/Header.tsx`
    ```ts
    import styles from "./Header.module.scss"
 
@@ -344,13 +309,13 @@
    export { Header }
    ```
 
-### Hero Component
+## Hero component
 
-1. Create `MariaFelix.module.scss`
+1. Create the directory and files
    ```sh
-   mkdir components/heroes && touch components/heroes/MariaFelix.module.scss
+   mkdir components/heroes && touch components/heroes/MariaFelix.module.scss && touch components/heroes/MariaFelix.tsx
    ```
-2. Edit `MariaFelix.module.scss`
+2. Edit `components/heroes/MariaFelix.module.scss`
    ```scss
    @use "/styles/variables" as var;
    @use "/styles/mixins" as mix;
@@ -362,7 +327,7 @@
    .picture {
      display: flex;
      justify-content: center;
-     max-width: var.$max-width;
+     max-width: var.$container-width;
      margin: 0 auto;
    }
 
@@ -398,11 +363,7 @@
      margin: 0;
    }
    ```
-3. Create `MariaFelix.tsx`
-   ```sh
-   touch components/heroes/MariaFelix.tsx
-   ```
-4. Edit `MariaFelix.tsx`
+3. Edit `components/heroes/MariaFelix.tsx`
    ```ts
    import styles from "./MariaFelix.module.scss"
 
@@ -443,13 +404,13 @@
    export { MariaFelix }
    ```
 
-### App JSX
+## Pages
 
-1. Create `_app.tsx`
+1. Create the directory and files
    ```sh
-   mkdir pages && touch pages/_app.tsx
+   mkdir pages && touch pages/_app.tsx && touch pages/index.tsx
    ```
-2. Edit `_app.tsx`
+2. Edit `pages/_app.tsx`
    ```ts
    import { AppProps } from 'next/app'
    import '../styles/brand.scss'
@@ -460,19 +421,12 @@
 
    export default MyApp
    ```
-
-### Home page JSX
-
-1. Create `index.tsx`
-   ```sh
-   touch pages/index.tsx
-   ```
-2. Edit `index.tsx`
+3. Edit `pages/index.tsx`
    ```ts
    import Head from 'next/head'
-   import { MariaFelix } from "~/components/heroes/MariaFelix"
    import { Footer } from "~/components/brand/Footer"
    import { Header } from "~/components/brand/Header"
+   import { MariaFelix } from "~/components/heroes/MariaFelix"
 
    const HomePage = (props) => {
      return (
