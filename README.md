@@ -443,10 +443,9 @@
 
 ## Resources
 
-* [About normalize.css](http://nicolasgallagher.com/about-normalize-css/)
 * [CSS Fluid Image Techniques for Responsive Site Design](https://thenewcode.com/586/CSS-Fluid-Image-Techniques-for-Responsive-Site-Design)
+* [Getting Started](https://nextjs.org/docs/)
 * [Hiding Content for Accessibility](https://snook.ca/archives/html_and_css/hiding-content-for-accessibility)
 * [Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
-* [Next.js: Absolute Imports and Module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases)
-* [Next.js: Built-In CSS Support](https://nextjs.org/docs/basic-features/built-in-css-support)
+* [Normalize.css](https://necolas.github.io/normalize.css/)
 * [Sticky Footer](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
