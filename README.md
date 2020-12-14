@@ -68,7 +68,7 @@
 
 ### Configure TypeScript
 
-1. Edit `tsconfig.json`, add `baseUrl` and `paths` to the `compilerOptions`, e.g...
+1. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`) e.g...
    ```sh
    {
      "compilerOptions": {
@@ -118,7 +118,7 @@
 
 ## Public files
 
-1. Create the directories
+1. Create the `public` directories
    ```sh
    mkdir -p public/fonts/poiret-one && mkdir -p public/images/brand && mkdir -p public/images/heroes/maria-felix
    ```
@@ -130,7 +130,7 @@
 
 ## Website styles
 
-1. Create the directory and files
+1. Create the `styles` directory and files
    ```sh
    mkdir styles && touch styles/_mixins.scss && touch styles/_variables.scss && touch styles/brand.scss
    ```
@@ -208,11 +208,9 @@
 
 ## Brand components
 
-### Footer component
-
-1. Create the directories and files
+1. Create the `components/brand` directory and files
    ```sh
-   mkdir -p components/brand && touch components/brand/Footer.module.scss && touch components/brand/Footer.tsx
+   mkdir -p components/brand && touch components/brand/Footer.module.scss && touch components/brand/Footer.tsx && touch components/brand/Header.module.scss && touch components/brand/Header.tsx
    ```
 2. Edit `components/brand/Footer.module.scss`
    ```scss
@@ -255,14 +253,7 @@
 
    export { Footer }
    ```
-
-### Header component
-
-1. Create the files
-   ```sh
-   touch components/brand/Header.module.scss && touch components/brand/Header.tsx
-   ```
-2. Edit `components/brand/Header.module.scss`
+4. Edit `components/brand/Header.module.scss`
    ```scss
    @use "/styles/variables" as var;
 
@@ -286,7 +277,7 @@
      font-size: clamp(100%, 2vw, 27px);
    }
    ```
-3. Edit `components/brand/Header.tsx`
+5. Edit `components/brand/Header.tsx`
    ```ts
    import styles from "./Header.module.scss"
 
@@ -305,7 +296,7 @@
 
 ## Hero component
 
-1. Create the directory and files
+1. Create the `components/heroes` directory and files
    ```sh
    mkdir components/heroes && touch components/heroes/MariaFelix.module.scss && touch components/heroes/MariaFelix.tsx
    ```
@@ -400,7 +391,7 @@
 
 ## Pages
 
-1. Create the directory and files
+1. Create the `pages` directory and files
    ```sh
    mkdir pages && touch pages/_app.tsx && touch pages/index.tsx
    ```
