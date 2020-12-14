@@ -75,7 +75,8 @@
        "baseUrl": ".",
        "paths": {
          "~/*": ["./*"]
-       }
+       },
+       "other": "options"
      }
    }
    ```
@@ -329,7 +330,7 @@
    }
 
    .container {
-     max-width: var.$max-width;
+     max-width: var.$container-width;
      margin: 0 auto;
      padding: var.$gutter-height 0;
    }
@@ -366,11 +367,11 @@
          <picture className={styles.picture}>
            <source
              srcSet="/images/heroes/maria-felix/landscape.jpg"
-             media="(min-aspect-ratio: 4/3), (orientation: landscape)"
+             media="(min-aspect-ratio: 4/3)"
            />
            <source
              srcSet="/images/heroes/maria-felix/portrait.jpg"
-             media="(max-aspect-ratio: 4/3), (orientation: portrait)"
+             media="(max-aspect-ratio: 4/3)"
            />
            <img
              className="fluid-image"
@@ -442,12 +443,10 @@
 
 ## Resources
 
-* [Absolute Imports and Module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases)
 * [About normalize.css](http://nicolasgallagher.com/about-normalize-css/)
-* [Built-In CSS Support](https://nextjs.org/docs/basic-features/built-in-css-support)
 * [CSS Fluid Image Techniques for Responsive Site Design](https://thenewcode.com/586/CSS-Fluid-Image-Techniques-for-Responsive-Site-Design)
-* [File:Weather icon - full moon.svg](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg)
 * [Hiding Content for Accessibility](https://snook.ca/archives/html_and_css/hiding-content-for-accessibility)
 * [Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
-* [Poiret One](https://fonts.google.com/specimen/Poiret+One)
-* [Sticky Footer -- Solved by Flexbox --- Cleaner, hack-free CSS](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+* [Next.js: Absolute Imports and Module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases)
+* [Next.js: Built-In CSS Support](https://nextjs.org/docs/basic-features/built-in-css-support)
+* [Sticky Footer](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
