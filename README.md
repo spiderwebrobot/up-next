@@ -1,12 +1,14 @@
 # Up Next
 
+A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.typescriptlang.org/), [Sass](https://sass-lang.com/) and [Jest](https://jestjs.io/).
+
 * [Prerequisites](#prerequisites)
+* [Start a Next.js project](#start-a-next.js-project)
+* [Add TypeScript](#add-typescript)
+* [Add Sass](#add-sass)
+* [Add Jest](#add-jest)
+* [Housekeeping](#housekeeping)
 * [Project setup](#project-setup)
-* [Public files](#public-files)
-* [Website styles](#website-styles)
-* [Brand components](#brand-components)
-* [Hero component](#hero-component)
-* [Pages](#pages)
 * [Resources](#resources)
 
 ## Prerequisites
@@ -34,9 +36,7 @@
    brew install yarn
    ```
 
-## Project setup
-
-### Start a Next.js project
+## Start a Next.js project
 
 1. Create the project directory, e.g.
    ```sh
@@ -51,7 +51,7 @@
    yarn create next-app .
    ```
 
-### Install TypeScript
+## Add TypeScript
 
 1. Create a TypeScript configuration file
    ```sh
@@ -81,7 +81,7 @@
    }
    ```
 
-### Install Sass
+## Add Sass
 
 1. Add `sass` to the project
    ```sh
@@ -102,21 +102,51 @@
    }
    ```
 
-### Install normalize.css
+### Add Normalize.css
 
 1. Add `normalize.css` to the project
    ```sh
    yarn add normalize.css
    ```
 
-### Housekeeping
+## Add Jest
+
+1. Add `jest` to the project
+   ```sh
+   yarn add --dev babel-jest identity-obj-proxy jest @testing-library/react @types/jest
+   ```
+2. Create Jest configuration files
+   ```sh
+   touch .babelrc jest.config.js
+   ```
+3. Edit `.babelrc`
+   ```json
+   {
+     "presets": ["next/babel"]
+   }
+   ```
+4. Edit `jest.config.js`
+   ```js
+   module.exports = {
+     roots: ["<rootDir>"],
+     moduleFileExtensions: ["ts", "tsx", "js", "json", "jsx"],
+     testPathIgnorePatterns: ["<rootDir>[/\\\\](node_modules|.next)[/\\\\]"],
+     transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$"],
+     transform: {"^.+\\.(ts|tsx)$": "babel-jest"},
+     moduleNameMapper: {"\\.(css|less|sass|scss)$": "identity-obj-proxy"},
+   }
+   ```
+
+## Housekeeping
 
 1. Remove the `pages`, `public` and `styles` directories
    ```sh
    rm -rf pages && rm -rf public && rm -rf styles
    ```
 
-## Public files
+## Project setup
+
+### Public files
 
 1. Create the `public` directories
    ```sh
@@ -128,7 +158,7 @@
 5. Download the [landscape hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
 6. Download the [portrait hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
 
-## Website styles
+### Website styles
 
 1. Create the `styles` directory and files
    ```sh
@@ -206,11 +236,11 @@
    }
    ```
 
-## Brand components
+### Brand components
 
 1. Create the `components/brand` directory and files
    ```sh
-   mkdir -p components/brand && touch components/brand/Footer.module.scss && touch components/brand/Footer.tsx && touch components/brand/Header.module.scss && touch components/brand/Header.tsx
+   mkdir -p components/brand && touch components/brand/Footer.module.scss && touch components/brand/Footer.tsx && touch components/brand/Header.module.scss && touch components/brand/Header.tsx && touch components/brand/index.test.tsx
    ```
 2. Edit `components/brand/Footer.module.scss`
    ```scss
@@ -244,7 +274,9 @@
        <footer className={styles.footer}>
          <div className={styles.container}>
            <div className={styles.copyright}>
-             &copy; {today.getFullYear()} Over the Moon | Powered by Next.js
+             &copy; <span data-testid="copyright-year">
+               {today.getFullYear()}
+             </span> Over the Moon | Powered by Next.js
            </div>
          </div>
        </footer>
@@ -293,8 +325,34 @@
 
    export { Header }
    ```
+6. Edit `components/brand/index.test.tsx`
+   ```ts
+   import React from 'react'
+   import { render } from "@testing-library/react"
+   import { Footer } from "./Footer"
+   import { Header } from "./Header"
 
-## Hero component
+   describe("Footer component", () => {
+     it("matches snapshot", () => {
+       const { asFragment } = render(<Footer />, {})
+       expect(asFragment()).toMatchSnapshot()
+     })
+
+     it("has copyright year", () => {
+       const { getByTestId } = render(<Footer />, {})
+       expect(getByTestId("copyright-year").textContent).toBe("2020")
+     })
+   })
+
+   describe("Header component", () => {
+     it("matches snapshot", () => {
+       const { asFragment } = render(<Header />, {})
+       expect(asFragment()).toMatchSnapshot()
+     })
+   })
+   ```
+
+### Hero component
 
 1. Create the `components/heroes` directory and files
    ```sh
@@ -389,7 +447,7 @@
    export { MariaFelix }
    ```
 
-## Pages
+### Pages
 
 1. Create the `pages` directory and files
    ```sh
@@ -413,7 +471,7 @@
    import { Header } from "~/components/brand/Header"
    import { MariaFelix } from "~/components/heroes/MariaFelix"
 
-   const HomePage = (props) => {
+   const HomePage = () => {
      return (
        <div className="page">
          <Head>
@@ -438,5 +496,6 @@
 * [Getting Started](https://nextjs.org/docs/)
 * [Hiding Content for Accessibility](https://snook.ca/archives/html_and_css/hiding-content-for-accessibility)
 * [Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
+* [NextJS Typescript Boilerplate](https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest)
 * [Normalize.css](https://necolas.github.io/normalize.css/)
 * [Sticky Footer](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
