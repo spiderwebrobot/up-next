@@ -1,14 +1,15 @@
 # Up Next
 
-A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.typescriptlang.org/), [Sass](https://sass-lang.com/) and [Jest](https://jestjs.io/).
+A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescriptlang.org/), [Sass](https://sass-lang.com/) and [Jest](https://jestjs.io/).
 
 * [Prerequisites](#prerequisites)
-* [Start a Next.js project](#start-a-next.js-project)
+* [Start a Next.js project](#start-a-nextjs-project)
+* [Clean up project files](#clean-up-project-files)
 * [Add TypeScript](#add-typescript)
 * [Add Sass](#add-sass)
 * [Add Jest](#add-jest)
-* [Housekeeping](#housekeeping)
-* [Project setup](#project-setup)
+* [Organize project files](#organize-project-files)
+* [Run it](#run-it)
 * [Resources](#resources)
 
 ## Prerequisites
@@ -51,24 +52,27 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    yarn create next-app .
    ```
 
+## Clean up project files
+
+1. Remove the `pages`, `public` and `styles` directories
+   ```sh
+   rm -rf pages && rm -rf public && rm -rf styles
+   ```
+
 ## Add TypeScript
 
-1. Create a TypeScript configuration file
-   ```sh
-   touch tsconfig.json
-   ```
-2. Add `typescript` to the project
+1. Add `typescript` to the project
    ```sh
    yarn add --dev typescript @types/react @types/node
    ```
-3. Autopopulate the `tsconfig.json` file
+2. Generate the `tsconfig.json` file
    ```sh
-   yarn dev
+   yarn dev # enter `control + c` after the file has been created
    ```
 
 ### Configure TypeScript
 
-1. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`) e.g...
+1. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`), e.g.
    ```sh
    {
      "compilerOptions": {
@@ -117,7 +121,7 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    ```
 2. Create Jest configuration files
    ```sh
-   touch .babelrc jest.config.js
+   touch .babelrc && touch jest.config.js
    ```
 3. Edit `.babelrc`
    ```json
@@ -137,14 +141,7 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    }
    ```
 
-## Housekeeping
-
-1. Remove the `pages`, `public` and `styles` directories
-   ```sh
-   rm -rf pages && rm -rf public && rm -rf styles
-   ```
-
-## Project setup
+## Organize project files
 
 ### Public files
 
@@ -152,8 +149,8 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    ```sh
    mkdir -p public/fonts/poiret-one && mkdir -p public/images/brand && mkdir -p public/images/heroes/maria-felix
    ```
-2. Download the latin-version of [Poiret One](https://fonts.googleapis.com/css2?family=Poiret+One&display=swap) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
-3. Download the [full moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
+2. Download [Poiret One](https://fonts.gstatic.com/s/poiretone/v9/UqyVK80NJXN4zfRgbdfbo55cV-UyZKA.woff2) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
+3. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
 4. Download the [fallback hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY414_CR18,0,414,414_AL_.jpg) to `public/images/heroes/maria-felix/enamorada.jpg`
 5. Download the [landscape hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
 6. Download the [portrait hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
@@ -410,39 +407,34 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    ```ts
    import styles from "./MariaFelix.module.scss"
 
-   const MariaFelix = () => {
-     return (
-       <figure className={styles.figure}>
-         <picture className={styles.picture}>
-           <source
-             srcSet="/images/heroes/maria-felix/landscape.jpg"
-             media="(min-aspect-ratio: 4/3)"
-           />
-           <source
-             srcSet="/images/heroes/maria-felix/portrait.jpg"
-             media="(max-aspect-ratio: 4/3)"
-           />
-           <img
-             className="fluid-image"
-             src="/images/heroes/maria-felix/enamorada.jpg"
-             alt="María Félix in Enamorada (1946)"
-           />
-         </picture>
-         <figcaption className={styles.caption}>
-           <div className={styles.container}>
-             <h1 className={styles.heading}>
-               Enamorada
-             </h1>
-             <blockquote className={styles.blockquote} cite="https://www.imdb.com/title/tt0038510/">
-               <p className={styles.blurb}>
-                 In Mexican Revolution times, a guerrilla general (Armendáriz) and his troops take the conservative town of Cholula, near by Mexico City. As the revolutionaries mistreat the town's riches, Armendáriz falls for beautiful and wild Beatriz Peñafiel (María Félix), the daughter of one of the town's richest men.
-               </p>
-             </blockquote>
-           </div>
-         </figcaption>
-       </figure>
-     )
-   }
+   const MariaFelix = () => (
+     <figure className={styles.figure}>
+       <picture className={styles.picture}>
+         <source
+           srcSet="/images/heroes/maria-felix/landscape.jpg"
+           media="(min-aspect-ratio: 4/3)" />
+         <source
+           srcSet="/images/heroes/maria-felix/portrait.jpg"
+           media="(max-aspect-ratio: 4/3)" />
+         <img
+           className="fluid-image"
+           src="/images/heroes/maria-felix/enamorada.jpg"
+           alt="María Félix in Enamorada (1946)" />
+       </picture>
+       <figcaption className={styles.caption}>
+         <div className={styles.container}>
+           <h1 className={styles.heading}>
+             Enamorada
+           </h1>
+           <blockquote className={styles.blockquote} cite="https://www.imdb.com/title/tt0038510/">
+             <p className={styles.blurb}>
+                       In Mexican Revolution times, a guerrilla general (Armendáriz) and his troops take the conservative town of Cholula, near by Mexico City.As the revolutionaries mistreat the town's riches, Armendáriz falls for beautiful and wild Beatriz Peñafiel (María Félix), the daughter of one of the town's richest men.
+             </p>
+           </blockquote>
+         </div>
+       </figcaption>
+     </figure>
+   )
 
    export { MariaFelix }
    ```
@@ -458,9 +450,7 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    import { AppProps } from 'next/app'
    import '../styles/brand.scss'
 
-   const MyApp = ({ Component, pageProps }: AppProps) => {
-     return <Component {...pageProps} />
-   }
+   const MyApp = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />
 
    export default MyApp
    ```
@@ -471,24 +461,50 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
    import { Header } from "~/components/brand/Header"
    import { MariaFelix } from "~/components/heroes/MariaFelix"
 
-   const HomePage = () => {
-     return (
-       <div className="page">
-         <Head>
-           <title>Welcome to Over the Moon</title>
-           <link rel="preload" href="/fonts/poiret-one/PoiretOne-Regular.woff2" as="font" type="font/woff2" />
-         </Head>
-         <Header />
-         <main>
-           <MariaFelix />
-         </main>
-         <Footer />
-       </div>
-     )
-   }
+   const HomePage = () => (
+     <div className="page">
+       <Head>
+         <title>Welcome to Over the Moon</title>
+         <link rel="preload" href="/fonts/poiret-one/PoiretOne-Regular.woff2" as="font" type="font/woff2" />
+       </Head>
+       <Header />
+       <main>
+         <MariaFelix />
+       </main>
+       <Footer />
+     </div>
+   )
 
    export default HomePage
    ```
+
+## Run it
+
+1. Edit `package.json`, add `test` to `scripts`, e.g.
+   ```json
+   {
+     "scripts": {
+       "dev": "next dev",
+       "build": "next build",
+       "start": "next start",
+       "test": "jest"
+     },
+     "other": "configs"
+   }
+   ```
+2. Install all of the dependencies defined in the `package.json` file
+   ```sh
+   yarn install
+   ```
+3. Run tests
+   ```sh
+   yarn test # fix broken tests if need be
+   ```
+4. Run the development environment
+   ```sh
+   yarn dev
+   ```
+5. Navigate to http://localhost:3000
 
 ## Resources
 
@@ -498,4 +514,6 @@ A [Next.js](https://nextjs.org/) quick start with [TypeScript](https://www.types
 * [Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
 * [NextJS Typescript Boilerplate](https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest)
 * [Normalize.css](https://necolas.github.io/normalize.css/)
+* [Poiret One](https://fonts.google.com/specimen/Poiret+One)
 * [Sticky Footer](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+* [Weather Icon: Full Moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg)
