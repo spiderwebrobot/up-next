@@ -145,15 +145,13 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 ### Public files
 
-1. Create the `public` directories
+1. Create the `public` directories and files
    ```sh
-   mkdir -p public/fonts/poiret-one && mkdir -p public/images/brand && mkdir -p public/images/heroes/maria-felix
+   mkdir -p public/fonts/poiret-one && mkdir -p public/images/heroes && touch public/fonts/poiret-one/PoiretOne-Regular.woff2 && touch public/favicon.svg && touch public/images/heroes/enamorada.jpg
    ```
 2. Download [Poiret One](https://fonts.gstatic.com/s/poiretone/v9/UqyVK80NJXN4zfRgbdfbo55cV-UyZKA.woff2) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
-3. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/images/brand/full-moon.svg`
-4. Download the [fallback hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY414_CR18,0,414,414_AL_.jpg) to `public/images/heroes/maria-felix/enamorada.jpg`
-5. Download the [landscape hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1024_.jpg) to `public/images/heroes/maria-felix/landscape.jpg`
-6. Download the [portrait hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY768_CR18,0,768,768_AL_.jpg) to `public/images/heroes/maria-felix/portrait.jpg`
+3. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/favicon.svg`
+4. Download the [hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY1536_CR18,108,2048,1080_AL_.jpg) to `public/images/heroes/enamorada.jpg`
 
 ### Website styles
 
@@ -163,7 +161,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```
 2. Edit `styles/_mixins.scss`
    ```scss
-   // Media Queries
+   // Media queries
 
    @mixin media-landscape {
      @media (min-aspect-ratio: 4/3) {
@@ -193,7 +191,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```scss
    @import "normalize.css"; // TODO: figure out how to `@use` normalize.css
 
-   // Web Fonts
+   // Web fonts
 
    @font-face {
      font-family: "Poiret One";
@@ -204,7 +202,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
    }
 
-   // Page Styles
+   // Page styles
 
    .page {
      display: flex;
@@ -212,17 +210,11 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      flex-direction: column;
    }
 
-   main {
+   .main {
      flex: 1;
    }
 
-   // Utility Styles
-
-   .fluid-image {
-     width: 100%;
-     height: auto;
-     image-rendering: -webkit-optimize-contrast;
-   }
+   // Utility styles
 
    .visually-hidden {
      position: absolute;
@@ -300,7 +292,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      align-items: center;
      height: 2.7rem;
      font-family: "Poiret One", fantasy;
-     background: transparent url(/images/brand/full-moon.svg) no-repeat center left / contain;
+     background: transparent url(/favicon.svg) no-repeat center left / contain;
      color: white;
      padding-left: 2.7rem;
      font-size: clamp(100%, 2vw, 27px);
@@ -364,9 +356,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      margin: 0;
    }
 
-   .picture {
-     display: flex;
-     justify-content: center;
+   .frame {
      max-width: var.$container-width;
      margin: 0 auto;
    }
@@ -406,29 +396,27 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 3. Edit `components/heroes/MariaFelix.tsx`
    ```ts
    import styles from "./MariaFelix.module.scss"
+   import Image from "next/image"
 
    const MariaFelix = () => (
      <figure className={styles.figure}>
-       <picture className={styles.picture}>
-         <source
-           srcSet="/images/heroes/maria-felix/landscape.jpg"
-           media="(min-aspect-ratio: 4/3)" />
-         <source
-           srcSet="/images/heroes/maria-felix/portrait.jpg"
-           media="(max-aspect-ratio: 4/3)" />
-         <img
-           className="fluid-image"
-           src="/images/heroes/maria-felix/enamorada.jpg"
-           alt="María Félix in Enamorada (1946)" />
-       </picture>
+       <div className={styles.frame}>
+         <Image
+           src="/images/heroes/enamorada.jpg"
+           alt="María Félix in Enamorada (1946)"
+           width={1024}
+           height={540}
+           layout="responsive"
+         />
+       </div>
        <figcaption className={styles.caption}>
          <div className={styles.container}>
            <h1 className={styles.heading}>
-             Enamorada
+             Enamorada (1946)
            </h1>
            <blockquote className={styles.blockquote} cite="https://www.imdb.com/title/tt0038510/">
              <p className={styles.blurb}>
-                       In Mexican Revolution times, a guerrilla general (Armendáriz) and his troops take the conservative town of Cholula, near by Mexico City.As the revolutionaries mistreat the town's riches, Armendáriz falls for beautiful and wild Beatriz Peñafiel (María Félix), the daughter of one of the town's richest men.
+               During the Mexican Revolution, a rebel general falls in love with the independent-minded daughter of an aristocrat in the town that he is occupying.
              </p>
            </blockquote>
          </div>
@@ -466,9 +454,10 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
        <Head>
          <title>Welcome to Over the Moon</title>
          <link rel="preload" href="/fonts/poiret-one/PoiretOne-Regular.woff2" as="font" type="font/woff2" />
+         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
        </Head>
        <Header />
-       <main>
+       <main className="main">
          <MariaFelix />
        </main>
        <Footer />
@@ -516,4 +505,5 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 * [Normalize.css](https://necolas.github.io/normalize.css/)
 * [Poiret One](https://fonts.google.com/specimen/Poiret+One)
 * [Sticky Footer](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+* [SVG, Favicons, and All the Fun Things We Can Do With Them](https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/)
 * [Weather Icon: Full Moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg)
