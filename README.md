@@ -4,11 +4,10 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 * [Prerequisites](#prerequisites)
 * [Start a Next.js project](#start-a-nextjs-project)
-* [Clean up project files](#clean-up-project-files)
 * [Add TypeScript](#add-typescript)
 * [Add Sass](#add-sass)
 * [Add Jest](#add-jest)
-* [Organize project files](#organize-project-files)
+* [Organize the project files](#organize-the-project-files)
 * [Run it](#run-it)
 * [Resources](#resources)
 
@@ -52,27 +51,17 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    yarn create next-app .
    ```
 
-## Clean up project files
-
-1. Remove the `pages`, `public` and `styles` directories
-   ```sh
-   rm -rf pages && rm -rf public && rm -rf styles
-   ```
-
 ## Add TypeScript
 
 1. Add `typescript` to the project
    ```sh
    yarn add --dev typescript @types/react @types/node
    ```
-2. Generate the `tsconfig.json` file
+2. Generate a TypeScript configuration file
    ```sh
-   yarn dev # enter `control + c` after the file has been created
+   touch tsconfig.json && yarn dev # enter `control + c` after the file has been created
    ```
-
-### Configure TypeScript
-
-1. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`), e.g.
+3. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`), e.g.
    ```sh
    {
      "compilerOptions": {
@@ -141,7 +130,14 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    }
    ```
 
-## Organize project files
+## Organize the project files
+
+### Housekeeping
+
+1. Remove the `pages`, `public` and `styles` directories
+   ```sh
+   rm -rf pages && rm -rf public && rm -rf styles
+   ```
 
 ### Public files
 
