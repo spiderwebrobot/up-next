@@ -92,6 +92,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      sassOptions: {
        includePaths: [path.join(__dirname, 'styles')],
      },
+     trailingSlash: true,
    }
    ```
 
@@ -108,7 +109,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```sh
    yarn add --dev babel-jest identity-obj-proxy jest @testing-library/react @types/jest
    ```
-2. Create Jest configuration files
+2. Create Babel and Jest configuration files
    ```sh
    touch .babelrc && touch jest.config.js
    ```
@@ -149,11 +150,11 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 3. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/favicon.svg`
 4. Download the [hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY1536_CR18,108,2048,1080_AL_.jpg) to `public/images/heroes/enamorada.jpg`
 
-### Website styles
+### Application styles
 
 1. Create the `styles` directory and files
    ```sh
-   mkdir styles && touch styles/_mixins.scss && touch styles/_variables.scss && touch styles/brand.scss
+   mkdir styles && touch styles/_mixins.scss && touch styles/_variables.scss && touch styles/app.scss
    ```
 2. Edit `styles/_mixins.scss`
    ```scss
@@ -183,7 +184,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    $text-heading: clamp(27px, 3vw, 36px);
    $text-lead: clamp(100%, 3vw, 1.26rem);
    ```
-4. Edit `styles/brand.scss`
+4. Edit `styles/app.scss`
    ```scss
    @import "normalize.css"; // TODO: figure out how to `@use` normalize.css
 
@@ -221,61 +222,23 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    }
    ```
 
-### Brand components
+### Components
 
-1. Create the `components/brand` directory and files
+1. Create the `components` directory and files
    ```sh
-   mkdir -p components/brand && touch components/brand/Footer.module.scss && touch components/brand/Footer.tsx && touch components/brand/Header.module.scss && touch components/brand/Header.tsx && touch components/brand/index.test.tsx
+   mkdir components && touch components/brand.module.scss && touch components/brand.test.tsx && touch components/brand.tsx && touch components/hero.module.scss && touch components/hero.tsx
    ```
-2. Edit `components/brand/Footer.module.scss`
-   ```scss
-   @use "/styles/variables" as var;
-
-   .footer {
-     border-top: solid 1px var.$light-gray;
-     padding: 0 var.$gutter-width;
-   }
-
-   .container {
-     padding: var.$gutter-height 0;
-     max-width: var.$container-width;
-     margin: 0 auto;
-   }
-
-   .copyright {
-     font-family: "Franklin ITC", sans-serif;
-     font-weight: 400;
-     font-style: normal;
-     font-size: clamp(12px, 2vw, 100%);
-   }
-   ```
-3. Edit `components/brand/Footer.tsx`
-   ```ts
-   import styles from "./Footer.module.scss"
-
-   const Footer = () => {
-     const today = new Date();
-     return (
-       <footer className={styles.footer}>
-         <div className={styles.container}>
-           <div className={styles.copyright}>
-             &copy; <span data-testid="copyright-year">
-               {today.getFullYear()}
-             </span> Over the Moon | Powered by Next.js
-           </div>
-         </div>
-       </footer>
-     )
-   }
-
-   export { Footer }
-   ```
-4. Edit `components/brand/Header.module.scss`
+2. Edit `components/brand.module.scss`
    ```scss
    @use "/styles/variables" as var;
 
    .header {
      background-color: var.$dark-gray;
+   }
+
+   .footer {
+     border-top: solid 1px var.$light-gray;
+     padding: 0 var.$gutter-width;
    }
 
    .container {
@@ -293,10 +256,18 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      padding-left: 2.7rem;
      font-size: clamp(100%, 2vw, 27px);
    }
+
+   .copyright {
+     font-family: "Franklin ITC", sans-serif;
+     font-weight: 400;
+     font-style: normal;
+     font-size: clamp(12px, 2vw, 100%);
+     padding: var.$gutter-height 0;
+   }
    ```
-5. Edit `components/brand/Header.tsx`
+3. Edit `components/brand.tsx`
    ```ts
-   import styles from "./Header.module.scss"
+   import styles from "./brand.module.scss"
 
    const Header = () => (
      <header className={styles.header}>
@@ -308,14 +279,28 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      </header>
    )
 
-   export { Header }
+   const Footer = () => {
+     const today = new Date();
+     return (
+       <footer className={styles.footer}>
+         <div className={styles.container}>
+           <div className={styles.copyright}>
+             &copy; <span data-testid="copyright-year">
+               {today.getFullYear()}
+             </span> Over the Moon | Powered by Next.js
+           </div>
+         </div>
+       </footer>
+     )
+   }
+
+   export { Footer, Header }
    ```
-6. Edit `components/brand/index.test.tsx`
+4. Edit `components/brand.test.tsx`
    ```ts
-   import React from 'react'
+   import React from "react"
    import { render } from "@testing-library/react"
-   import { Footer } from "./Footer"
-   import { Header } from "./Header"
+   import { Footer, Header } from "./brand"
 
    describe("Footer component", () => {
      it("matches snapshot", () => {
@@ -337,13 +322,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    })
    ```
 
-### Hero component
-
-1. Create the `components/heroes` directory and files
-   ```sh
-   mkdir components/heroes && touch components/heroes/MariaFelix.module.scss && touch components/heroes/MariaFelix.tsx
-   ```
-2. Edit `components/heroes/MariaFelix.module.scss`
+5. Edit `components/hero.module.scss`
    ```scss
    @use "/styles/variables" as var;
    @use "/styles/mixins" as mix;
@@ -389,12 +368,12 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      margin: 0;
    }
    ```
-3. Edit `components/heroes/MariaFelix.tsx`
+6. Edit `components/hero.tsx`
    ```ts
-   import styles from "./MariaFelix.module.scss"
+   import styles from "./hero.module.scss"
    import Image from "next/image"
 
-   const MariaFelix = () => (
+   const Hero = () => (
      <figure className={styles.figure}>
        <div className={styles.frame}>
          <Image
@@ -420,7 +399,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      </figure>
    )
 
-   export { MariaFelix }
+   export { Hero }
    ```
 
 ### Pages
@@ -432,7 +411,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 2. Edit `pages/_app.tsx`
    ```ts
    import { AppProps } from 'next/app'
-   import '../styles/brand.scss'
+   import '../styles/app.scss'
 
    const MyApp = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />
 
@@ -441,9 +420,8 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 3. Edit `pages/index.tsx`
    ```ts
    import Head from 'next/head'
-   import { Footer } from "~/components/brand/Footer"
-   import { Header } from "~/components/brand/Header"
-   import { MariaFelix } from "~/components/heroes/MariaFelix"
+   import { Footer, Header } from "~/components/brand"
+   import { Hero } from "~/components/hero"
 
    const HomePage = () => (
      <div className="page">
@@ -454,7 +432,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
        </Head>
        <Header />
        <main className="main">
-         <MariaFelix />
+         <Hero />
        </main>
        <Footer />
      </div>
@@ -465,7 +443,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 ## Run it
 
-1. Edit `package.json`, add `test` to `scripts`, e.g.
+1. Edit `package.json` (add `test` to `scripts`), e.g.
    ```json
    {
      "scripts": {
