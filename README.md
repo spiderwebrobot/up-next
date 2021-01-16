@@ -144,10 +144,10 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 1. Create the `public` directories and files
    ```sh
-   mkdir -p public/fonts/poiret-one && mkdir -p public/images/heroes && touch public/fonts/poiret-one/PoiretOne-Regular.woff2 && touch public/favicon.svg && touch public/images/heroes/enamorada.jpg
+   mkdir -p public/fonts/poiret-one && mkdir -p public/images/heroes && touch public/favicon.svg && touch public/fonts/poiret-one/PoiretOne-Regular.woff2 && touch public/images/heroes/enamorada.jpg
    ```
-2. Download [Poiret One](https://fonts.gstatic.com/s/poiretone/v9/UqyVK80NJXN4zfRgbdfbo55cV-UyZKA.woff2) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
-3. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/favicon.svg`
+2. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/favicon.svg`
+3. Download [Poiret One](https://fonts.gstatic.com/s/poiretone/v9/UqyVK80NJXN4zfRgbdfbo55cV-UyZKA.woff2) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
 4. Download the [hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY1536_CR18,108,2048,1080_AL_.jpg) to `public/images/heroes/enamorada.jpg`
 
 ### Application styles
