@@ -59,7 +59,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```
 2. Generate a TypeScript configuration file
    ```sh
-   touch tsconfig.json && yarn dev # enter `control + c` after the file has been created
+   touch tsconfig.json && yarn dev # enter `control + c` after `compiled successfully`
    ```
 3. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`), e.g.
    ```sh
