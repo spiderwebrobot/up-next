@@ -74,11 +74,11 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    }
    ```
 
-## Add Sass
+## Add Sass and Normalize.css
 
-1. Add `sass` to the project
+1. Add `sass` and `normalize.css` to the project
    ```sh
-   yarn add --dev sass
+   yarn add --dev sass && yarn add normalize.css
    ```
 2. Create a Next.js configuration file
    ```sh
@@ -92,15 +92,8 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      sassOptions: {
        includePaths: [path.join(__dirname, 'styles')],
      },
-     trailingSlash: true,
+     // trailingSlash: true,
    }
-   ```
-
-### Add Normalize.css
-
-1. Add `normalize.css` to the project
-   ```sh
-   yarn add normalize.css
    ```
 
 ## Add Jest
@@ -144,11 +137,11 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 1. Create the `public` directories and files
    ```sh
-   mkdir -p public/fonts/poiret-one && mkdir -p public/images/heroes && touch public/favicon.svg && touch public/fonts/poiret-one/PoiretOne-Regular.woff2 && touch public/images/heroes/enamorada.jpg
+   mkdir -p public/fonts && mkdir -p public/images && touch public/favicon.svg && touch public/fonts/PoiretOne-Regular.woff2 && touch public/images/enamorada.jpg
    ```
 2. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/favicon.svg`
-3. Download [Poiret One](https://fonts.gstatic.com/s/poiretone/v9/UqyVK80NJXN4zfRgbdfbo55cV-UyZKA.woff2) to `public/fonts/poiret-one/PoiretOne-Regular.woff2`
-4. Download the [hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY1536_CR18,108,2048,1080_AL_.jpg) to `public/images/heroes/enamorada.jpg`
+3. Download [Poiret One](https://fonts.gstatic.com/s/poiretone/v9/UqyVK80NJXN4zfRgbdfbo55cV-UyZKA.woff2) to `public/fonts/PoiretOne-Regular.woff2`
+4. Download the [hero](https://m.media-amazon.com/images/M/MV5BMGVhMmE2ZGQtOTc0Yy00MTdjLTljNmUtMWM1NWVmZGM5YWJjXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY1536_CR18,108,2048,1080_AL_.jpg) to `public/images/enamorada.jpg`
 
 ### Application styles
 
@@ -181,8 +174,14 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
    // Text
 
-   $text-heading: clamp(27px, 3vw, 36px);
-   $text-lead: clamp(100%, 3vw, 1.26rem);
+   $fluid-heading: clamp(27px, 3vw, 36px);
+   $fluid-caption: clamp(100%, 3vw, 1.26rem);
+
+   // Formulas...
+   // The default browser font-size is usually 16 pixels.
+   // Pixels / 16 = REMs
+   // REMs * 16 = Pixels
+   // (Pixels / Viewport Width) * 100 = Viewport Percentage
    ```
 4. Edit `styles/app.scss`
    ```scss
@@ -197,18 +196,6 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      font-display: swap;
      src: url("/fonts/poiret-one/PoiretOne-Regular.woff2") format("woff2");
      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-   }
-
-   // Page styles
-
-   .page {
-     display: flex;
-     min-height: 100vh;
-     flex-direction: column;
-   }
-
-   .main {
-     flex: 1;
    }
 
    // Utility styles
@@ -226,7 +213,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 1. Create the `components` directory and files
    ```sh
-   mkdir components && touch components/brand.module.scss && touch components/brand.test.tsx && touch components/brand.tsx && touch components/hero.module.scss && touch components/hero.tsx
+   mkdir components && touch components/brand.module.scss && touch components/brand.test.tsx && touch components/brand.tsx && touch components/hero.module.scss && touch components/hero.tsx && touch components/layout.module.scss && touch components/layout.tsx
    ```
 2. Edit `components/brand.module.scss`
    ```scss
@@ -310,7 +297,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
      it("has copyright year", () => {
        const { getByTestId } = render(<Footer />, {})
-       expect(getByTestId("copyright-year").textContent).toBe("2020")
+       expect(getByTestId("copyright-year").textContent).toBe("1969")
      })
    })
 
@@ -349,7 +336,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    .heading {
      font-family: "Franklin ITC", sans-serif;
      font-weight: 700;
-     font-size: var.$text-heading;
+     font-size: var.$fluid-heading;
      margin: 0 0 0.9rem;
    }
 
@@ -363,7 +350,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    .blurb {
      color: #222;
      font-family: Georgia, Times, "Times New Roman", serif;
-     font-size: var.$text-lead;
+     font-size: var.$fluid-caption;
      line-height: 1.8;
      margin: 0;
    }
@@ -377,7 +364,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
      <figure className={styles.figure}>
        <div className={styles.frame}>
          <Image
-           src="/images/heroes/enamorada.jpg"
+           src="/images/enamorada.jpg"
            alt="María Félix in Enamorada (1946)"
            width={1024}
            height={540}
@@ -401,6 +388,48 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
    export { Hero }
    ```
+7. Edit `components/layout.module.scss`
+   ```scss
+   .page {
+     display: flex;
+     min-height: 100vh;
+     flex-direction: column;
+   }
+
+   .main {
+     flex: 1;
+   }
+   ```
+8. Edit `components/layout.tsx`
+   ```ts
+   import styles from "./layout.module.scss"
+   import Head from "next/head"
+   import { Footer, Header } from "~/components/brand"
+
+   type Props = {
+     children: React.ReactNode
+     footer?: React.ReactNode
+     header?: React.ReactNode
+   }
+
+   const Layout = ({ children, footer=<Footer />, header=<Header /> }: Props) => (
+     <div className={styles.page}>
+       <Head>
+         <title>Over the Moon</title>
+         <link rel="preload" href="/fonts/PoiretOne-Regular.woff2" as="font" type="font/woff2" />
+         <link rel="stylesheet" href="/styles/app.scss" />
+         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+       </Head>
+       {header}
+       <main className={styles.main}>
+         {children}
+       </main>
+       {footer}
+     </div>
+   )
+
+   export { Layout }
+   ```
 
 ### Pages
 
@@ -410,8 +439,8 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```
 2. Edit `pages/_app.tsx`
    ```ts
-   import { AppProps } from 'next/app'
-   import '../styles/app.scss'
+   import { AppProps } from "next/app"
+   import "../styles/app.scss"
 
    const MyApp = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />
 
@@ -419,23 +448,17 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```
 3. Edit `pages/index.tsx`
    ```ts
-   import Head from 'next/head'
-   import { Footer, Header } from "~/components/brand"
+   import Head from "next/head"
+   import { Layout } from "~/components/layout"
    import { Hero } from "~/components/hero"
 
    const HomePage = () => (
-     <div className="page">
+     <Layout>
        <Head>
          <title>Welcome to Over the Moon</title>
-         <link rel="preload" href="/fonts/poiret-one/PoiretOne-Regular.woff2" as="font" type="font/woff2" />
-         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
        </Head>
-       <Header />
-       <main className="main">
-         <Hero />
-       </main>
-       <Footer />
-     </div>
+       <Hero />
+     </Layout>
    )
 
    export default HomePage
@@ -461,7 +484,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
    ```
 3. Run tests
    ```sh
-   yarn test # fix broken tests if need be
+   yarn test # please fix broken after running
    ```
 4. Run the development environment
    ```sh
