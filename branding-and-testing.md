@@ -1,5 +1,7 @@
 # Branding and Testing
 
+Adding [Jest](https://jestjs.io/) to a [Next.js](https://nextjs.org/) project. Also adding `<header>` and `<footer>` branding. These changes build upon [up-next](README.md).
+
 ## Add Jest
 
 1. Add `jest` to the project
@@ -71,7 +73,7 @@
    import { render } from "@testing-library/react"
    import { Footer } from "./footer"
 
-   const copyrightYear = "2022"
+   const copyrightYear = "1969"
 
    describe("Footer component", () => {
      it("matches snapshot", () => {
@@ -125,3 +127,31 @@
      </header>
    )
    ```
+
+## Run it
+
+1. Edit `package.json` (add `test` to `scripts`), e.g.
+   ```json
+   {
+     "scripts": {
+       "dev": "next dev",
+       "build": "next build",
+       "start": "next start",
+       "test": "jest"
+     },
+     "other": "configs"
+   }
+   ```
+2. Install all of the dependencies defined in the `package.json` file
+   ```sh
+   yarn install
+   ```
+3. Run tests (and maybe fix broken tests after running)
+   ```sh
+   yarn test
+   ```
+4. Run the development environment
+   ```sh
+   yarn dev
+   ```
+5. Navigate to http://localhost:3000
