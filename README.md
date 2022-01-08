@@ -5,7 +5,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 * [Prerequisites](#prerequisites)
 * [Start a Next.js project](#start-a-nextjs-project)
 * [Add TypeScript](#add-typescript)
-* [Add Sass](#add-sass)
+* [Add Sass and Normalize.css](#add-sass-and-normalizecss)
 * [Organize the project files](#organize-the-project-files)
 * [Run it](#run-it)
 * [Resources](#resources)
