@@ -256,6 +256,7 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 ## Resources
 
+* [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 * [Getting Started](https://nextjs.org/docs/)
 * [Hiding Content for Accessibility](https://snook.ca/archives/html_and_css/hiding-content-for-accessibility)
 * [Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
