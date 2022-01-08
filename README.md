@@ -1,6 +1,6 @@
 # Up Next
 
-A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescriptlang.org/), [Sass](https://sass-lang.com/) and [Jest](https://jestjs.io/).
+A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescriptlang.org/) and [Sass](https://sass-lang.com/).
 
 * [Prerequisites](#prerequisites)
 * [Start a Next.js project](#start-a-nextjs-project)
