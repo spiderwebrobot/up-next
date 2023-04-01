@@ -1,30 +1,24 @@
 # Up Next
 
-A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescriptlang.org/) and [Sass](https://sass-lang.com/).
+Start a [Next.js](https://nextjs.org) project on a Mac.
 
-* [Prerequisites](#prerequisites)
-* [Start a Next.js project](#start-a-nextjs-project)
-* [Add TypeScript](#add-typescript)
-* [Add Sass and Normalize.css](#add-sass-and-normalizecss)
-* [Organize the project files](#organize-the-project-files)
-* [Run it](#run-it)
-* [Resources](#resources)
+## Install Homebrew
 
-## Prerequisites
-
-### Install brew
+[Homebrew](https://brew.sh) is a software package management system for macOS.
 
 1. Check if `brew` is already installed
    ```sh
    which brew # e.g. /usr/local/bin/brew
    ```
-2. If `brew` is already installed, then consider an update...
+2. Otherwise, follow the installation instructions at https://brew.sh/
+3. If `brew` is already installed, then consider an update...
    ```sh
    brew update && brew upgrade && brew cleanup
    ```
-3. Otherwise, follow the installation instructions at https://brew.sh/
 
-### Install yarn
+## Install Yarn
+
+[Yarn](https://yarnpkg.com) is a package manager for JavaScript.
 
 1. Check if `yarn` is already installed
    ```sh
@@ -37,231 +31,122 @@ A [Next.js](https://nextjs.org/) project with [TypeScript](https://www.typescrip
 
 ## Start a Next.js project
 
+Next.js is a [React](https://reactjs.org) framework for building website applications. Please see the [Getting Started](https://nextjs.org/docs/getting-started) documentation for the latest instructions.
+
 1. Create the project directory, e.g.
    ```sh
-   mkdir moonbeam
+   mkdir mundo
    ```
 2. Navigate into the project directory, e.g.
    ```sh
-   cd moonbeam
+   cd mundo
    ```
 3. Create a Next.js application
    ```sh
-   yarn create next-app .
-   ```
-
-## Add TypeScript
-
-1. Add `typescript` to the project
-   ```sh
-   yarn add --dev typescript @types/react @types/node
-   ```
-2. Generate a TypeScript configuration file
-   ```sh
-   touch tsconfig.json && yarn dev # enter `control + c` after `compiled successfully`
-   ```
-3. Edit `tsconfig.json` (add `baseUrl` and `paths` to the `compilerOptions`), e.g.
-   ```sh
-   {
-     "compilerOptions": {
-       "baseUrl": ".",
-       "paths": {
-         "~/*": ["./*"]
-       },
-       "other": "options"
-     }
-   }
+   yarn create next-app --typescript .
    ```
 
 ## Add Sass and Normalize.css
+
+[Sass](https://sass-lang.com) is a CSS extension language. [Normalize.css](https://necolas.github.io/normalize.css/) provides cross-browser consistency for styling HTML elements.
 
 1. Add `sass` and `normalize.css` to the project
    ```sh
    yarn add --dev sass && yarn add normalize.css
    ```
-2. Create a Next.js configuration file
-   ```sh
-   touch next.config.js
-   ```
-3. Edit `next.config.js`
+2. Edit `next.config.js`
    ```js
    const path = require('path')
 
-   module.exports = {
+   /** @type {import('next').NextConfig} */
+   const nextConfig = {
+     reactStrictMode: true,
      sassOptions: {
        includePaths: [path.join(__dirname, 'styles')],
      },
-     // trailingSlash: true,
    }
+
+   module.exports = nextConfig
    ```
-
-## Organize the project files
-
-### Housekeeping
-
-1. Remove the `pages`, `public` and `styles` directories
+3. Create a website application stylesheet
    ```sh
-   rm -rf pages && rm -rf public && rm -rf styles
+   touch styles/app.scss
+   ```
+4. Edit `styles/app.scss`
+    ```scss
+    // utility styles
+
+    .visually-hidden {
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      width: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+    }
+    ```
+5. Edit `pages/_app.tsx`
+   ```tsx
+   import 'normalize.css'
+   import '@/styles/app.scss'
+   import type { AppProps } from 'next/app'
+
+   export default function App({ Component, pageProps }: AppProps) {
+     return <Component {...pageProps} />
+   }
    ```
 
-### Public files
+## Update your favorite icon
 
-1. Create the `public` directory and `favicon.svg` file
+A [favicon](https://developer.mozilla.org/en-US/docs/Glossary/Favicon) is a tiny icon included along with a website
+
+1. Create an SVG file
    ```sh
-   mkdir public && touch public/favicon.svg
+   touch public/favicon.svg
    ```
-2. Download the [full moon](https://upload.wikimedia.org/wikipedia/commons/e/ee/Weather_icon_-_full_moon.svg) to `public/favicon.svg`
-
-### Application styles
-
-1. Create the `styles` directory and files
-   ```sh
-   mkdir styles && touch styles/_variables.scss && touch styles/app.scss
-   ```
-2. Edit `styles/_variables.scss`
-   ```scss
-
-   // layout
-
-   $container-width: 1080px;
-   ```
-3. Edit `styles/app.scss`
-   ```scss
-   @use "/styles/variables" as var;
-   @import "normalize.css"; // TODO: figure out how to `@use` normalize.css   
-
-   // utility styles
-
-   .container {
-     margin: 0 auto;
-     max-width: var.$container-width;
-   }
-
-   .section {
-     padding: 72px 36px;
-   }
-
-   .visually-hidden {
-     position: absolute;
-     overflow: hidden;
-     clip: rect(0 0 0 0);
-     height: 1px; width: 1px;
-     margin: -1px; padding: 0; border: 0;
-   }
-   ```
-
-### Components
-
-1. Create the `components/common` directories and files
-   ```sh
-   mkdir -p components/common && touch components/common/layout.module.scss && touch components/common/layout.tsx
-   ```
-7. Edit `components/common/layout.module.scss`
-   ```scss
-   .page {
-     display: flex;
-     min-height: 100vh;
-     flex-direction: column;
-   }
-
-   .main {
-     flex: 1;
-   }
-   ```
-8. Edit `components/layout.tsx`
-   ```ts
-   import styles from "./layout.module.scss"
-   import Head from "next/head"
-
-   export const Layout = ({ children, footer=</>, header=</> }: {
-     children: React.ReactNode
-     footer?: React.ReactNode
-     header?: React.ReactNode
-   }) => {
-     return (
-       <div className={styles.page}>
-         <Head>
-           <title>Moonbeam</title>
-           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-         </Head>
-         {header}
-         <main className={styles.main}>
-           {children}
-         </main>
-         {footer}
-       </div>
-     )
-   }
-   ```
-
-### Pages
-
-1. Create the `pages` directory and files
-   ```sh
-   mkdir pages && touch pages/_app.tsx && touch pages/index.tsx
-   ```
-2. Edit `pages/_app.tsx`
-   ```ts
-   import { AppProps } from "next/app"
-   import "../styles/app.scss"
-
-   const MyApp = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />
-
-   export default MyApp
+2. Edit `public/favicon.svg`
+   ```svg
+   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm0 30c-1.967 0-3.84-.407-5.538-1.139l7.286-8.197a.998.998 0 0 0 .253-.664v-3a1 1 0 0 0-1-1c-3.531 0-7.256-3.671-7.293-3.707A1 1 0 0 0 9.001 12h-4a1 1 0 0 0-1 1v6c0 .379.214.725.553.894l3.447 1.724v5.871c-3.627-2.53-6-6.732-6-11.489 0-2.147.484-4.181 1.348-6h3.652c.265 0 .52-.105.707-.293l4-4A1 1 0 0 0 12.001 5V2.581a14.013 14.013 0 0 1 4-.581c2.2 0 4.281.508 6.134 1.412A5.961 5.961 0 0 0 20.002 8c0 1.603.624 3.109 1.757 4.243a5.985 5.985 0 0 0 4.536 1.751c.432 1.619 1.211 5.833-.263 11.635a.936.936 0 0 0-.026.163A13.956 13.956 0 0 1 16.002 30z"/></svg>
    ```
 3. Edit `pages/index.tsx`
-   ```ts
-   import Head from "next/head"
-   import { Layout } from "~/components/layout"
+   ```tsx
+   import Head from 'next/head'
 
-   const HomePage = () => (
-     <Layout>
-       <Head>
-         <title>Welcome to Moonbeam</title>
-       </Head>
-       <section className="section">
-         <div className="container">
-           <h1 style={{ margin: 0 }}>Shoot for the moon!</h1>
-         </div>
-       </section>
-     </Layout>
-   )
-
-   export default HomePage
-   ```
-
-## Run it
-
-1. Edit `package.json` (add `test` to `scripts`), e.g.
-   ```json
-   {
-     "scripts": {
-       "dev": "next dev",
-       "build": "next build",
-       "start": "next start",
-       "test": "jest"
-     },
-     "other": "configs"
+   const Home = () => {
+     return (
+       <>
+         <Head>
+           <title>Welcome home</title>
+           <meta name="viewport" content="width=device-width, initial-scale=1" />
+           <link rel="icon" href="/favicon.svg" />
+         </Head>
+         <main>
+           <h1>Your dogs must be barking 🐶</h1>
+           <p>Why don’t you come sit a spell and tell us all about it.</p>
+         </main>
+       </>
+     )
    }
+
+   export default Home
    ```
-2. Install all of the dependencies defined in the `package.json` file
+
+## You did it!
+
+Nice work bud, let’s check out your work.
+
+1. Install all of the dependencies defined in the `package.json` file
    ```sh
    yarn install
    ```
-3. Run the development environment
+2. Run the development environment
    ```sh
    yarn dev
    ```
-4. Navigate to http://localhost:3000
+3. Navigate to http://localhost:3000
 
-## Resources
+## What’s next
 
-* [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-* [Getting Started](https://nextjs.org/docs/)
-* [Hiding Content for Accessibility](https://snook.ca/archives/html_and_css/hiding-content-for-accessibility)
-* [Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
-* [NextJS Typescript Boilerplate](https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest)
-* [Normalize.css](https://necolas.github.io/normalize.css/)
-* [Sticky Footer](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
-* [SVG, Favicons, and All the Fun Things We Can Do With Them](https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/)
-* [Weather Icon: Full Moon](https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg)
+Pat yourself on the back, you deserve a break. Hit <kbd>Ctrl</kbd> + <kbd>c</kbd> to stop the development environment. In our next expisode we go [international](https://nextjs.org/docs/advanced-features/i18n-routing).
