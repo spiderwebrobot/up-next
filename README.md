@@ -48,7 +48,7 @@ Next.js is a [React](https://reactjs.org) framework for building website applica
 
 ## Add Sass and Normalize.css
 
-[Sass](https://sass-lang.com) is a CSS extension language. [Normalize.css](https://necolas.github.io/normalize.css/) provides cross-browser consistency for styling HTML elements.
+[Sass](https://sass-lang.com) is a CSS extension language, while [Normalize.css](https://necolas.github.io/normalize.css/) provides cross-browser consistency for styling HTML elements.
 
 1. Add `sass` and `normalize.css` to the project
    ```sh
@@ -100,7 +100,7 @@ Next.js is a [React](https://reactjs.org) framework for building website applica
 
 ## Update your favorite icon
 
-A [favicon](https://developer.mozilla.org/en-US/docs/Glossary/Favicon) is a tiny icon included along with a website
+A [favicon](https://developer.mozilla.org/en-US/docs/Glossary/Favicon) is the tiny icon displayed in the browser’s page tab.
 
 1. Create an SVG file
    ```sh
